@@ -26,8 +26,8 @@ pub fn build(b: *std.Build) void {
         .root_source_file = .{ .path = "src/main.zig" },
         .target = target,
         .optimize = optimize,
-        .strip = optimize == .ReleaseSmall,
-        .single_threaded = optimize == .ReleaseSmall,
+        .strip = optimize == .ReleaseSmall or optimize == .ReleaseFast,
+        .single_threaded = optimize == .ReleaseSmall or optimize == .ReleaseFast,
     });
 
     exe.root_module.addImport("win32", zigwin32_dep.module("zigwin32"));
